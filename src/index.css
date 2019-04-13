@@ -1,0 +1,46 @@
+@font-face {
+	font-family: 'justice_leagueregular';
+	src: url('./fonts/justice_league.eot');
+	src: url('./fonts/justice_league.eot?#iefix') format('embedded-opentype'),
+		url('./fonts/justice_league.woff') format('woff'), url('./fonts/justice_league.ttf') format('truetype'),
+		url('./fonts/justice_league.svg#justice_leagueregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+		"Droid Sans", "Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.carbon-fibre {
+	background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px,
+		radial-gradient(rgba(255, 255, 255, .1) 15%, transparent 20%) 0 1px,
+		radial-gradient(rgba(255, 255, 255, .1) 15%, transparent 20%) 8px 9px;
+	background-color: #282828;
+	background-size: 16px 16px;
+}
+
+.paper {
+	background-color: #fff;
+	background-image: linear-gradient(#eee .1em, transparent .1em);
+	background-size: 100% 1em;
+}
+
+.dark-shadow {
+	box-shadow: 0 0 15px 0 rgb(0, 0, 0);
+}
+
+.space {
+	letter-spacing: 1px;
+}
+
+@media only screen and (max-width: 768px) {
+	.nav-top {
+		box-shadow: 0 0 0 0 rgb(0, 0, 0);
+	}
+}

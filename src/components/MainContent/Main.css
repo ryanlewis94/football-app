@@ -1,0 +1,86 @@
+.main-content {
+	margin-top: 7vh;
+	max-height: 93vh;
+	overflow-y: auto;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	padding: 50px;
+}
+
+.match-card {
+	width: 100%;
+	height: auto;
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	border-radius: 5px;
+	color: black;
+	align-items: center;
+	font-size: 1.2em;
+	box-shadow: 0 8px 6px -6px black;
+	cursor: pointer;
+}
+
+.match-teams {
+	text-align: center;
+	grid-column-start: 1;
+	grid-column-end: 8;
+}
+.match-teams div {
+	display: inline-block;
+}
+.score {
+	margin: 0 15px;
+}
+
+.match-score {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 10px;
+	border-right: 1px solid #abced4;
+}
+
+.match-time {
+	grid-column-start: 8;
+	border-left: 1px dotted rgb(250, 154, 154);
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.match-id {
+	display: none;
+}
+
+.fixture-list {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 25px;
+}
+
+.LogIn {
+	grid-column-start: 2;
+}
+
+.match-room {
+	grid-column-start: 1;
+	grid-column-end: 4;
+	font-size: 2em;
+}
+
+.score-board div {
+	display: inline-block;
+}
+
+.backBtn {
+	text-align: left;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.comments-area {
+	width: 75%;
+	border-radius: 10px;
+	height: 50vh;
+}

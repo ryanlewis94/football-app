@@ -1,0 +1,128 @@
+.nav-top {
+	margin-left: 0;
+	text-align: center;
+	min-height: 75px;
+	height: 7vh;
+	width: inherit;
+	position: fixed;
+}
+.title {
+	font-size: 2em;
+	text-transform: uppercase;
+}
+.nav-side {
+	height: 100vh;
+	width: 10%;
+	min-width: 175px;
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	padding: 20px 0;
+	align-items: center;
+	text-align: center;
+	z-index: 1;
+}
+.logo {
+	font-size: 4em;
+	margin: 0 0 25px 0;
+	font-style: italic;
+	font-family: 'justice_leagueregular';
+	text-shadow: 7px 7px 7px rgb(0, 0, 0);
+}
+.logReg {
+	margin: 15px 0 0 0;
+}
+.logReg div {
+	padding: 5px 8px;
+	cursor: pointer;
+	border: 2px solid white;
+	border-radius: 5px;
+	margin: 10px;
+	transition: 1s;
+	text-transform: uppercase;
+	font-size: 0.9em;
+	display: inline-block;
+}
+.logReg div:hover {
+	background: white;
+	color: black;
+}
+
+.menu {
+	overflow-y: auto;
+	height: 100%;
+	width: 100%;
+}
+
+.social-icons {
+	height: 60px;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: flex-end;
+}
+
+.league p {
+	text-align: right;
+	padding: 15px 10px;
+	text-transform: uppercase;
+	font-weight: bold;
+	margin: 0;
+}
+.league div {
+	border-bottom: 1px solid rgb(126, 125, 125);
+	cursor: pointer;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	transition: 0.1s;
+}
+
+.eng {
+	background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(img/prem.jpg);
+}
+.spain {
+	background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(img/laLiga.png);
+}
+.germ {
+	background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(img/bundesliga-logo.jpg);
+}
+.italy {
+	background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(img/serie-a.png);
+}
+.france {
+	background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(img/ligue1.png);
+}
+.neth {
+	background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(img/eredivisie-logo.png);
+}
+.port {
+	background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(img/liganos.jpg);
+}
+.eur {
+	background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(img/champions.jpg);
+}
+.europa {
+	background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(img/europa.png);
+}
+
+@media only screen and (max-width: 1200px) {
+}
+@media only screen and (max-width: 992px) {
+}
+@media only screen and (max-width: 768px) {
+	.hamburger {
+		display: flex;
+		float: right;
+		font-size: 2.5em;
+		padding: 0;
+		margin-right: 15px;
+		cursor: pointer;
+	}
+	.nav-side {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 380px) {
+}
