@@ -80,7 +80,32 @@
 }
 
 .comments-area {
+	margin: auto;
 	width: 75%;
 	border-radius: 10px;
 	height: 50vh;
+	overflow-y: auto;
+	color: black;
+}
+
+.comment {
+	background: #abced4;
+	border-radius: 15px;
+	width: auto;
+	font-size: 0.8em;
+	float: left;
+	margin: 15px;
+}
+.comment div {
+	display: inline-block;
+}
+
+.user-comment-info {
+	background: #0051ff77;
+	padding: 0 10px;
+	border-radius: 15px 0 0 15px;
+}
+
+.comment-content {
+	padding: 0 10px;
 }

@@ -14,7 +14,7 @@ const NavSide = ({ onChange, isSignedIn, user }) => {
 				<div className="menu">
 					<h1 className="space">LEAGUES</h1>
 					<div className="league space">
-						<div className="eng" onClick={() => onChange('match', 'Premier League', '25')}>
+						<div className="eng" onClick={() => onChange('match', 'Premier League', '')}>
 							<p>Premier League</p>
 						</div>
 						<div className="spain" onClick={() => onChange('match', 'La Liga', '74')}>

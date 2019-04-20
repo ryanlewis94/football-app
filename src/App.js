@@ -85,7 +85,13 @@ class App extends Component {
 						) : route === 'register' ? (
 							<Register loadUser={this.loadUser} onChange={this.onChange} />
 						) : (
-							<MatchRoom onChange={this.onChange} league={league} leagueid={leagueid} id={id} />
+							<MatchRoom
+								onChange={this.onChange}
+								league={league}
+								leagueid={leagueid}
+								id={id}
+								user={user}
+							/>
 						)}
 					</div>
 				</div>

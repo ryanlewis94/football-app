@@ -1,4 +1,5 @@
 import React from 'react';
+import Comment from './Comment';
 import './Main.css';
 
 class MatchRoom extends React.Component {
@@ -59,9 +60,15 @@ class MatchRoom extends React.Component {
 				</div>
 				<p>{this.state.live.time}</p>
 				<div>
-					<textarea className="comments-area paper" type="text" readOnly>
-						Goooooooaaaaaaaaaaaaaaaallllll!!!!!!!!!!!!
-					</textarea>
+					<div className="comments-area paper">
+						<Comment />
+					</div>
+					<br />
+					<br />
+					<label>Comment Here: </label>
+					<input />
+					<button>Enter</button>
+					<button>Mic</button>
 				</div>
 			</div>
 		);
