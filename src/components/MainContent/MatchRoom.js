@@ -5,7 +5,12 @@ import './Main.css';
 class MatchRoom extends React.Component {
 	constructor(props) {
 		super();
-		this.state = { live: {} };
+		this.state = {
+			live: {},
+			comments: [],
+			isLoaded: false,
+			comment: ''
+		};
 	}
 
 	async componentDidMount() {
@@ -33,12 +38,58 @@ class MatchRoom extends React.Component {
 						this.setState({ live: filterArray[0] });
 					});
 			}, 30000);
+
+			setInterval(async () => {
+				fetch(`http://localhost:3000/getComment/${this.props.id}`).then((res) => res.json()).then((json) => {
+					this.setState({
+						isLoaded: true,
+						comments: json
+					});
+				});
+			}, 1000);
 		} catch (e) {
 			console.log(e);
 		}
 	}
 
+	onCommentChange = (event) => {
+		this.setState({ comment: event.target.value });
+	};
+
+	onSubmitComment = (event) => {
+		event.preventDefault();
+		if (this.state.comment) {
+			fetch('http://localhost:3000/comment', {
+				method: 'post',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					comment: this.state.comment,
+					userid: this.props.user.id,
+					matchid: this.props.id
+				})
+			});
+
+			fetch('http://localhost:3000/entries', {
+				method: 'put',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					id: this.props.user.id
+				})
+			});
+			/*.then((response) => response.json())
+				.then((count) => {
+					this.props.updateUserEntries(count);
+				});*/
+
+			document.getElementById('comment-form').reset();
+			this.setState({
+				comment: ''
+			});
+		}
+	};
+
 	render() {
+		var { comments, live } = this.state;
 		return (
 			<div className="match-room">
 				<div
@@ -49,26 +100,37 @@ class MatchRoom extends React.Component {
 				</div>
 				<div className="score-board">
 					<div className="HomeTeam">
-						<p>{this.state.live.home_name}</p>
+						<p>{live.home_name}</p>
 					</div>
 					<div className="score">
-						<p>{this.state.live.score}</p>
+						<p>{live.score}</p>
 					</div>
 					<div className="AwayTeam">
-						<p>{this.state.live.away_name}</p>
+						<p>{live.away_name}</p>
 					</div>
 				</div>
-				<p>{this.state.live.time}</p>
+				<p>{live.time}</p>
 				<div>
 					<div className="comments-area paper">
-						<Comment />
+						{comments.map((comment, i) => {
+							return (
+								<Comment
+									key={i}
+									name={comments[i].name}
+									entries={comments[i].entries}
+									comment={comments[i].comment}
+								/>
+							);
+						})}
 					</div>
 					<br />
 					<br />
-					<label>Comment Here: </label>
-					<input />
-					<button>Enter</button>
-					<button>Mic</button>
+					<form id="comment-form">
+						<label>Comment Here: </label>
+						<input onChange={this.onCommentChange} id="mainInput" />
+						<input onClick={this.onSubmitComment} type="submit" value="Enter" />
+						<button>Mic</button>
+					</form>
 				</div>
 			</div>
 		);

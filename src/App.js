@@ -42,6 +42,10 @@ class App extends Component {
 		});
 	};
 
+	updateUserEntries = (count) => {
+		this.setState(Object.assign(this.state.user, { entries: count }));
+	};
+
 	onRouteChange = (route) => {
 		if (route === 'signout') {
 			this.setState(initialState);
@@ -87,6 +91,7 @@ class App extends Component {
 						) : (
 							<MatchRoom
 								onChange={this.onChange}
+								updateUserEntries={this.updateUserEntries}
 								league={league}
 								leagueid={leagueid}
 								id={id}

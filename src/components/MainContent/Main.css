@@ -95,6 +95,7 @@
 	font-size: 0.8em;
 	float: left;
 	margin: 15px;
+	clear: both;
 }
 .comment div {
 	display: inline-block;

@@ -2,11 +2,7 @@ import React from 'react';
 import './userCard.css';
 
 const userCard = ({ user }) => {
-	return (
-		<p className="userCard">
-			#1 {user.name} <span className="entries">{user.entries}</span>
-		</p>
-	);
+	return <p className="userCard">{user.name}</p>;
 };
 
 export default userCard;

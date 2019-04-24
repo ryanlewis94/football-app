@@ -1,16 +1,16 @@
 import React from 'react';
 import './Main.css';
 
-const Comment = () => {
+const Comment = ({ name, entries, comment }) => {
 	return (
 		<div className="comment">
 			<div className="user-comment-info">
 				<p>
-					Ryan <span className="entries">112</span>
+					{name} <span className="entries">{entries}</span>
 				</p>
 			</div>
 			<div className="comment-content">
-				<p>Goallllaassssoooooo!!!!!</p>
+				<p>{comment}</p>
 			</div>
 		</div>
 	);
