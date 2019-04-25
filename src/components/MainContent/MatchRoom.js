@@ -26,7 +26,7 @@ class MatchRoom extends React.Component {
 					this.setState({ live: filterArray[0] });
 				});
 
-			setInterval(async () => {
+			this.interval = setInterval(async () => {
 				fetch(
 					`http://livescore-api.com/api-client/scores/live.json?key=8uoqtmuaQ1s4bRe4&secret=M2baUvmhpyZunhzvLYVekqpbrRgCJuHv`
 				)
@@ -39,7 +39,7 @@ class MatchRoom extends React.Component {
 					});
 			}, 30000);
 
-			setInterval(async () => {
+			this.interval = setInterval(async () => {
 				fetch(`http://localhost:3000/getComment/${this.props.id}`).then((res) => res.json()).then((json) => {
 					this.setState({
 						isLoaded: true,
@@ -50,6 +50,10 @@ class MatchRoom extends React.Component {
 		} catch (e) {
 			console.log(e);
 		}
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.interval);
 	}
 
 	onCommentChange = (event) => {
