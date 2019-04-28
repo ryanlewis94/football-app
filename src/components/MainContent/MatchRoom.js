@@ -31,7 +31,7 @@ class MatchRoom extends React.Component {
 				});
 			}, 30000);
 
-			this.interval = setInterval(async () => {
+			this.interval2 = setInterval(async () => {
 				fetch(`https://fc-football-server.herokuapp.com/getComment/${this.props.id}`)
 					.then((res) => res.json())
 					.then((json) => {
@@ -48,6 +48,7 @@ class MatchRoom extends React.Component {
 
 	componentWillUnmount() {
 		clearInterval(this.interval);
+		clearInterval(this.interval2);
 	}
 
 	onCommentChange = (event) => {
