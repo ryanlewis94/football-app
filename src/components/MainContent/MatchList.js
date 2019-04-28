@@ -27,11 +27,11 @@ class MatchList extends React.Component {
 			this.setState({ date: today });
 
 			if (!this.state.leagueid) {
-				fetch(`http://localhost:3000/arsenal`).then((res) => res.json()).then((json) => {
+				fetch(`https://fc-football-server.herokuapp.com/arsenal`).then((res) => res.json()).then((json) => {
 					this.setState({ live: json.data.data.match });
 				});
 			} else {
-				fetch(`http://localhost:3000/arsenalFixtures/${this.state.leagueid}`)
+				fetch(`https://fc-football-server.herokuapp.com/arsenalFixtures/${this.state.leagueid}`)
 					.then((res) => res.json())
 					.then((json) => {
 						this.setState({
@@ -40,7 +40,7 @@ class MatchList extends React.Component {
 						});
 					});
 
-				fetch(`http://localhost:3000/arsenalLive/${this.state.leagueid}`)
+				fetch(`https://fc-football-server.herokuapp.com/arsenalLive/${this.state.leagueid}`)
 					.then((res) => res.json())
 					.then((json) => {
 						this.setState({ live: json.data.data.match });
@@ -70,11 +70,11 @@ class MatchList extends React.Component {
 			this.setState({ isLoaded: false });
 
 			if (!nextProps.leagueid) {
-				fetch(`http://localhost:3000/arsenal`).then((res) => res.json()).then((json) => {
+				fetch(`https://fc-football-server.herokuapp.com/arsenal`).then((res) => res.json()).then((json) => {
 					this.setState({ isLoaded: true, live: json.data.data.match });
 				});
 			} else {
-				fetch(`http://localhost:3000/arsenalFixtures/${nextProps.leagueid}`)
+				fetch(`https://fc-football-server.herokuapp.com/arsenalFixtures/${nextProps.leagueid}`)
 					.then((res) => res.json())
 					.then((json) => {
 						this.setState({
@@ -83,7 +83,7 @@ class MatchList extends React.Component {
 						});
 					});
 
-				fetch(`http://localhost:3000/arsenalLive/${nextProps.leagueid}`)
+				fetch(`https://fc-football-server.herokuapp.com/arsenalLive/${nextProps.leagueid}`)
 					.then((res) => res.json())
 					.then((json) => {
 						this.setState({ live: json.data.data.match });

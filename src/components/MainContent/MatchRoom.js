@@ -15,7 +15,7 @@ class MatchRoom extends React.Component {
 
 	async componentDidMount() {
 		try {
-			fetch(`http://localhost:3000/arsenal`).then((res) => res.json()).then((json) => {
+			fetch(`https://fc-football-server.herokuapp.com/arsenal`).then((res) => res.json()).then((json) => {
 				const filterArray = json.data.data.match.filter((fixture) => {
 					return fixture.id === this.props.id;
 				});
@@ -23,7 +23,7 @@ class MatchRoom extends React.Component {
 			});
 
 			this.interval = setInterval(async () => {
-				fetch(`http://localhost:3000/arsenal`).then((res) => res.json()).then((json) => {
+				fetch(`https://fc-football-server.herokuapp.com/arsenal`).then((res) => res.json()).then((json) => {
 					const filterArray = json.data.data.match.filter((fixture) => {
 						return fixture.id === this.props.id;
 					});
@@ -32,12 +32,14 @@ class MatchRoom extends React.Component {
 			}, 30000);
 
 			this.interval = setInterval(async () => {
-				fetch(`http://localhost:3000/getComment/${this.props.id}`).then((res) => res.json()).then((json) => {
-					this.setState({
-						isLoaded: true,
-						comments: json
+				fetch(`https://fc-football-server.herokuapp.com/getComment/${this.props.id}`)
+					.then((res) => res.json())
+					.then((json) => {
+						this.setState({
+							isLoaded: true,
+							comments: json
+						});
 					});
-				});
 			}, 1000);
 		} catch (e) {
 			console.log(e);
@@ -55,7 +57,7 @@ class MatchRoom extends React.Component {
 	onSubmitComment = (event) => {
 		event.preventDefault();
 		if (this.state.comment) {
-			fetch('http://localhost:3000/comment', {
+			fetch('https://fc-football-server.herokuapp.com/comment', {
 				method: 'post',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
@@ -65,7 +67,7 @@ class MatchRoom extends React.Component {
 				})
 			});
 
-			fetch('http://localhost:3000/entries', {
+			fetch('https://fc-football-server.herokuapp.com/entries', {
 				method: 'put',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
