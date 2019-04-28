@@ -26,26 +26,26 @@ class MatchList extends React.Component {
 			today = yyyy + '-' + mm + '-' + dd;
 			this.setState({ date: today });
 
-			fetch(
-				`http://livescore-api.com/api-client/fixtures/matches.json?key=8uoqtmuaQ1s4bRe4&secret=M2baUvmhpyZunhzvLYVekqpbrRgCJuHv&league=${this
-					.state.leagueid}`
-			)
-				.then((res) => res.json())
-				.then((json) => {
-					this.setState({
-						isLoaded: true,
-						fixtures: json.data.fixtures
+			if (!this.state.leagueid) {
+				fetch(`http://localhost:3000/arsenal`).then((res) => res.json()).then((json) => {
+					this.setState({ live: json.data.data.match });
+				});
+			} else {
+				fetch(`http://localhost:3000/arsenalFixtures/${this.state.leagueid}`)
+					.then((res) => res.json())
+					.then((json) => {
+						this.setState({
+							isLoaded: true,
+							fixtures: json.data.data.fixtures
+						});
 					});
-				});
 
-			fetch(
-				`http://livescore-api.com/api-client/scores/live.json?key=8uoqtmuaQ1s4bRe4&secret=M2baUvmhpyZunhzvLYVekqpbrRgCJuHv&league=${this
-					.state.leagueid}`
-			)
-				.then((res) => res.json())
-				.then((json) => {
-					this.setState({ live: json.data.match });
-				});
+				fetch(`http://localhost:3000/arsenalLive/${this.state.leagueid}`)
+					.then((res) => res.json())
+					.then((json) => {
+						this.setState({ live: json.data.data.match });
+					});
+			}
 
 			/*setInterval(async () => {
 				fetch(
@@ -68,24 +68,27 @@ class MatchList extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.leagueid !== this.state.leagueid) {
 			this.setState({ isLoaded: false });
-			fetch(
-				`http://livescore-api.com/api-client/fixtures/matches.json?key=8uoqtmuaQ1s4bRe4&secret=M2baUvmhpyZunhzvLYVekqpbrRgCJuHv&league=${nextProps.leagueid}`
-			)
-				.then((res) => res.json())
-				.then((json) => {
-					this.setState({
-						isLoaded: true,
-						fixtures: json.data.fixtures
-					});
-				});
 
-			fetch(
-				`http://livescore-api.com/api-client/scores/live.json?key=8uoqtmuaQ1s4bRe4&secret=M2baUvmhpyZunhzvLYVekqpbrRgCJuHv&league=${nextProps.leagueid}`
-			)
-				.then((res) => res.json())
-				.then((json) => {
-					this.setState({ live: json.data.match });
+			if (!nextProps.leagueid) {
+				fetch(`http://localhost:3000/arsenal`).then((res) => res.json()).then((json) => {
+					this.setState({ isLoaded: true, live: json.data.data.match });
 				});
+			} else {
+				fetch(`http://localhost:3000/arsenalFixtures/${nextProps.leagueid}`)
+					.then((res) => res.json())
+					.then((json) => {
+						this.setState({
+							isLoaded: true,
+							fixtures: json.data.data.fixtures
+						});
+					});
+
+				fetch(`http://localhost:3000/arsenalLive/${nextProps.leagueid}`)
+					.then((res) => res.json())
+					.then((json) => {
+						this.setState({ live: json.data.data.match });
+					});
+			}
 		}
 	}
 

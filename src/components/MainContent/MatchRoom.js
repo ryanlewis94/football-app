@@ -15,28 +15,20 @@ class MatchRoom extends React.Component {
 
 	async componentDidMount() {
 		try {
-			fetch(
-				`http://livescore-api.com/api-client/scores/live.json?key=8uoqtmuaQ1s4bRe4&secret=M2baUvmhpyZunhzvLYVekqpbrRgCJuHv`
-			)
-				.then((res) => res.json())
-				.then((json) => {
-					const filterArray = json.data.match.filter((fixture) => {
+			fetch(`http://localhost:3000/arsenal`).then((res) => res.json()).then((json) => {
+				const filterArray = json.data.data.match.filter((fixture) => {
+					return fixture.id === this.props.id;
+				});
+				this.setState({ live: filterArray[0] });
+			});
+
+			this.interval = setInterval(async () => {
+				fetch(`http://localhost:3000/arsenal`).then((res) => res.json()).then((json) => {
+					const filterArray = json.data.data.match.filter((fixture) => {
 						return fixture.id === this.props.id;
 					});
 					this.setState({ live: filterArray[0] });
 				});
-
-			this.interval = setInterval(async () => {
-				fetch(
-					`http://livescore-api.com/api-client/scores/live.json?key=8uoqtmuaQ1s4bRe4&secret=M2baUvmhpyZunhzvLYVekqpbrRgCJuHv`
-				)
-					.then((res) => res.json())
-					.then((json) => {
-						const filterArray = json.data.match.filter((fixture) => {
-							return fixture.id === this.props.id;
-						});
-						this.setState({ live: filterArray[0] });
-					});
 			}, 30000);
 
 			this.interval = setInterval(async () => {
