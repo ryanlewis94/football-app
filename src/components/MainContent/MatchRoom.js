@@ -1,4 +1,5 @@
 import React from 'react';
+import socketIOClient from 'socket.io-client';
 import Comment from './Comment';
 import './Main.css';
 
@@ -13,8 +14,18 @@ class MatchRoom extends React.Component {
 		};
 	}
 
+	send = () => {
+		const socket = socketIOClient('http://localhost:3000');
+	};
+
 	async componentDidMount() {
 		try {
+			const socket = socketIOClient('http://localhost:3000');
+			socket.on('comment', (data) => {
+				console.log(data);
+				this.setState({ isLoaded: true, comments: data });
+			});
+
 			fetch(`https://fc-football-server.herokuapp.com/arsenal`).then((res) => res.json()).then((json) => {
 				const filterArray = json.data.data.match.filter((fixture) => {
 					return fixture.id === this.props.id;
@@ -31,7 +42,7 @@ class MatchRoom extends React.Component {
 				});
 			}, 30000);
 
-			this.interval2 = setInterval(async () => {
+			/*this.interval2 = setInterval(async () => {
 				fetch(`https://fc-football-server.herokuapp.com/getComment/${this.props.id}`)
 					.then((res) => res.json())
 					.then((json) => {
@@ -40,7 +51,7 @@ class MatchRoom extends React.Component {
 							comments: json
 						});
 					});
-			}, 1000);
+			}, 1000);*/
 		} catch (e) {
 			console.log(e);
 		}
@@ -58,15 +69,23 @@ class MatchRoom extends React.Component {
 	onSubmitComment = (event) => {
 		event.preventDefault();
 		if (this.state.comment) {
-			fetch('https://fc-football-server.herokuapp.com/comment', {
+			const socket = socketIOClient('http://localhost:3000');
+			socket.emit('comment', [
+				{
+					user: this.props.user.name,
+					time: this.state.live.time,
+					message: this.state.comment
+				}
+			]);
+			/*fetch('https://fc-football-server.herokuapp.com/comment', {
 				method: 'post',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
+				body: {
 					comment: this.state.comment,
 					userid: this.props.user.id,
 					matchid: this.props.id
-				})
-			});
+				}
+			});*/
 
 			fetch('https://fc-football-server.herokuapp.com/entries', {
 				method: 'put',
@@ -115,9 +134,9 @@ class MatchRoom extends React.Component {
 							return (
 								<Comment
 									key={i}
-									name={comments[i].name}
-									entries={comments[i].entries}
-									comment={comments[i].comment}
+									name={comments[i].user}
+									time={comments[i].time}
+									comment={comments[i].message}
 								/>
 							);
 						})}
