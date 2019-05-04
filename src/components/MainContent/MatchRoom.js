@@ -22,8 +22,10 @@ class MatchRoom extends React.Component {
 		try {
 			const socket = socketIOClient('http://localhost:3000');
 			socket.on('comment', (data) => {
-				console.log(data);
-				this.setState({ isLoaded: true, comments: data });
+				this.setState({ isLoaded: true });
+				this.setState((prevState) => ({
+					comments: [ ...prevState.comments, data ]
+				}));
 			});
 
 			fetch(`https://fc-football-server.herokuapp.com/arsenal`).then((res) => res.json()).then((json) => {
